@@ -9,14 +9,17 @@ public class BrandNewHashMap {
         double counter = 0;
         for (int i = 0; i < sklad.length; i++) {
             if (sklad[i] != null) {
-                counter++;
+                counter = counter + 1;
             }
         }
         if ((counter / sklad.length) >= loadFactor) {
             Node[] skladPoBolshe = new Node[sklad.length * 2];
-            for (int i = 0; i < sklad.length; i++) {
-                int index = getIndex(sklad[i].key) % skladPoBolshe.length;
-                skladPoBolshe[index] = sklad[i];
+            for (Node node : sklad) {
+                if (node != null) {
+                    int index = 0;
+                    index = (getIndex(node.getKey()) % skladPoBolshe.length);
+                    skladPoBolshe[index] = node;
+                }
             }
             sklad = skladPoBolshe;
         }
@@ -44,8 +47,10 @@ public class BrandNewHashMap {
     public Object get(Object key) {
         for (int i = 0; i < sklad.length; i++) {
             int index = (getIndex(key) + i) % sklad.length;
-            if (sklad[index] != null && sklad[index].key.equals(key) && !sklad[index].deleated) {
-                return (sklad[index].value);
+            if (sklad[index] != null) {
+                if (sklad[index].getKey().equals(key) && !sklad[index].deleated) {
+                    return (sklad[index].value);
+                }
             }
         }
         return (null);
@@ -54,7 +59,7 @@ public class BrandNewHashMap {
     public void remove(Object key) {
         for (int i = 0; i < sklad.length; i++) {
             int index = (getIndex(key) + i) % sklad.length;
-            if (sklad[index] != null && sklad[index].key.equals(key)) {
+            if (sklad[index] != null && sklad[index].getKey().equals(key)) {
                 sklad[index].deleated = true;
             }
         }

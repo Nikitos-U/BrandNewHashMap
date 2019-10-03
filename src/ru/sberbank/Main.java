@@ -16,5 +16,13 @@ public class Main {
         map.remove("hello");
         System.out.println(map.contains("hello"));
         System.out.println(map.size());
+        System.out.println(map.get("sosiska"));
+        map.put("asd",15);
+        System.out.println(map.get("sosiska"));
+        System.out.println(map.size());
+        System.out.println(map.contains("sosiska"));
+        System.out.println(map.get("asd"));
+        System.out.println(map.get("check"));
+        System.out.println(map.get("Na dobavku"));
     }
 }
