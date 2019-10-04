@@ -13,15 +13,15 @@ public class BrandNewHashMap {
             }
         }
         if ((counter / sklad.length) >= loadFactor) {
-            Node[] skladPoBolshe = new Node[sklad.length * 2];
-            for (Node node : sklad) {
+            Node[] skladPoBolshe = sklad;
+            sklad = new Node[sklad.length * 2];
+            size = size * 2;
+            for (Node node : skladPoBolshe) {
                 if (node != null) {
                     int index = 0;
-                    index = (getIndex(node.getKey()) % skladPoBolshe.length);
-                    skladPoBolshe[index] = node;
+                    put(node.getKey(),node.getValue());
                 }
             }
-            sklad = skladPoBolshe;
         }
     }
 
@@ -34,7 +34,7 @@ public class BrandNewHashMap {
         int index1 = getIndex(key) % sklad.length;
         if (sklad[index1] != somenode) {
             for (int i = 0; i < sklad.length; i++) {
-                int index = (getIndex(key) + i) % sklad.length;
+                int index = (getIndex(key) + i) % size;
                 if (sklad[index] == null || (sklad[index].deleated)) {
                     sklad[index] = somenode;
                     break;
